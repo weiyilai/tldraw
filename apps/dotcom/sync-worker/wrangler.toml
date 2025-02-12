@@ -46,6 +46,7 @@ name = "dev-tldraw-multiplayer"
 BOTCOM_POSTGRES_CONNECTION_STRING = "postgresql://user:password@127.0.0.1:6543/postgres"
 BOTCOM_POSTGRES_POOLED_CONNECTION_STRING = "postgresql://user:password@127.0.0.1:6543/postgres"
 TLDRAW_ENV = "development"
+MULTIPLAYER_SERVER = "http://localhost:3000"
 
 # we don't have a hard-coded name for preview. we instead have to generate it at build time and append it to this file.
 
@@ -196,6 +197,27 @@ bucket_name = "room-snapshots-preview"
 [[env.production.r2_buckets]]
 binding = "ROOM_SNAPSHOTS"
 bucket_name = "room-snapshots"
+
+#################### Assets R2 bucket ####################
+# in dev, we write to the preview bucket and need a `preview_bucket_name`
+[[env.dev.r2_buckets]]
+binding = 'UPLOADS'
+bucket_name = 'uploads-preview'
+preview_bucket_name = 'uploads-preview'
+
+# in preview and staging we write to the preview bucket
+[[env.preview.r2_buckets]]
+binding = 'UPLOADS'
+bucket_name = 'uploads-preview'
+
+[[env.staging.r2_buckets]]
+binding = 'UPLOADS'
+bucket_name = 'uploads-preview'
+
+# in production, we write to the main bucket
+[[env.production.r2_buckets]]
+binding = "UPLOADS"
+bucket_name = "uploads"
 
 #################### Room snapshots parent slug KV store ####################
 [[env.dev.kv_namespaces]]
