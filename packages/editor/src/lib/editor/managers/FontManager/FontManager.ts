@@ -8,7 +8,7 @@ import {
 	mapObjectMapValues,
 	objectMapEntries,
 } from '@tldraw/utils'
-import { Editor } from '../Editor'
+import { Editor } from '../../Editor'
 
 /**
  * Represents the `src` property of a {@link TLFontFace}.
@@ -96,8 +96,7 @@ export class FontManager {
 			},
 			{
 				areResultsEqual: areArraysShallowEqual,
-				// @ts-expect-error
-				areRecordsEqual: (a, b) => a.props.richText === b.props.richText,
+				areRecordsEqual: (a, b) => a.props === b.props && a.meta === b.meta,
 			}
 		)
 
