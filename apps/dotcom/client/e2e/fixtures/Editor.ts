@@ -47,6 +47,10 @@ export class Editor {
 		await expect(this.sidebarToggle).toBeVisible()
 	}
 
+	async getShapeCount() {
+		return await this.shapes.count()
+	}
+
 	@step
 	async expectShapesCount(expected: number) {
 		await expect(this.shapes).toHaveCount(expected)
@@ -81,8 +85,8 @@ export class Editor {
 
 	@step
 	async createTextShape(text: string) {
+		await this.page.getByTestId('tools.select').click()
 		await this.page.locator('.tl-background').click({ clickCount: 2 })
 		await this.page.locator('div[contenteditable="true"]').fill(text)
-		// await this.page.pause()
 	}
 }
