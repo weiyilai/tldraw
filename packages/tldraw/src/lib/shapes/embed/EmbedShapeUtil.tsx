@@ -21,6 +21,7 @@ import {
 	TLEmbedDefinition,
 	TLEmbedShapePermissions,
 	embedShapePermissionDefaults,
+	unknownEmbedShapePermissionOverrides,
 } from '../../defaultEmbedDefinitions'
 import { TLEmbedResult, getEmbedInfo } from '../../utils/embeds/embeds'
 import { BookmarkShapeComponent } from '../bookmark/BookmarkShapeUtil'
@@ -188,7 +189,9 @@ export class EmbedShapeUtil extends BaseBoxShapeUtil<TLEmbedShape> {
 
 		const sandbox = getSandboxPermissions({
 			...embedShapePermissionDefaults,
-			...(embedInfo?.definition?.overridePermissions ?? {}),
+			...(embedInfo
+				? (embedInfo.definition.overridePermissions ?? {})
+				: unknownEmbedShapePermissionOverrides),
 		})
 
 		if (embedInfo?.definition.type === 'github_gist') {
