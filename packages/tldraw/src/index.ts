@@ -87,6 +87,7 @@ export {
 	defaultHandleExternalExcalidrawContent,
 	defaultHandleExternalFileAsset,
 	defaultHandleExternalFileContent,
+	defaultHandleExternalFileReplaceContent,
 	defaultHandleExternalSvgTextContent,
 	defaultHandleExternalTextContent,
 	defaultHandleExternalTldrawContent,
