@@ -1782,6 +1782,7 @@ export function FrameToolbarItem(): JSX.Element;
 
 // @public (undocumented)
 export interface GeoShapeOptions extends ShapeOptionsWithDisplayValues<TLGeoShape, GeoShapeUtilDisplayValues> {
+    customGeoStyles?: Record<string, GeoTypeDefinition>;
     // (undocumented)
     showTextOutline: boolean;
 }
@@ -1804,6 +1805,10 @@ export class GeoShapeUtil extends BaseBoxShapeUtil<TLGeoShape> {
     canEdit(shape: TLGeoShape): boolean;
     // (undocumented)
     component(shape: TLGeoShape): JSX.Element;
+    // (undocumented)
+    static configure<T extends TLShapeUtilConstructor<any, any>>(this: T, options: T extends new (...args: any[]) => {
+        options: infer Options;
+    } ? Partial<Options> : never): T;
     // (undocumented)
     getCanvasSvgDefs(): TLShapeUtilCanvasSvgDef[];
     // (undocumented)
@@ -1903,6 +1908,39 @@ export class GeoShapeUtil extends BaseBoxShapeUtil<TLGeoShape> {
         opacity: number;
         parentId: TLParentId;
         props: {
+            align: "end-legacy" | "end" | "middle-legacy" | "middle" | "start-legacy" | "start";
+            color: TLDefaultColorStyle;
+            dash: "dashed" | "dotted" | "draw" | "none" | "solid";
+            fill: "fill" | "lined-fill" | "none" | "pattern" | "semi" | "solid";
+            font: TLDefaultFontStyle;
+            geo: "arrow-down" | "arrow-left" | "arrow-right" | "arrow-up" | "check-box" | "cloud" | "diamond" | "ellipse" | "heart" | "hexagon" | "octagon" | "oval" | "pentagon" | "rectangle" | "rhombus-2" | "rhombus" | "star" | "trapezoid" | "triangle" | "x-box";
+            growY: number;
+            h: number;
+            labelColor: TLDefaultColorStyle;
+            richText: {
+                attrs?: any;
+                content: unknown[];
+                type: string;
+            };
+            scale: number;
+            size: "l" | "m" | "s" | "xl";
+            url: string;
+            verticalAlign: "end" | "middle" | "start";
+            w: number;
+        };
+        rotation: number;
+        type: "geo";
+        typeName: "shape";
+        x: number;
+        y: number;
+    } | {
+        id: TLShapeId;
+        index: IndexKey;
+        isLocked: boolean;
+        meta: JsonObject;
+        opacity: number;
+        parentId: TLParentId;
+        props: {
             geo: "check-box";
         };
         rotation: number;
@@ -1988,6 +2026,20 @@ export interface GeoShapeUtilDisplayValues {
     strokeRoundness: number;
     // (undocumented)
     strokeWidth: number;
+}
+
+// @public
+export interface GeoTypeDefinition {
+    defaultSize?: {
+        h: number;
+        w: number;
+    };
+    getPath(w: number, h: number, shape: TLGeoShape, strokeWidth: number): PathBuilder;
+    icon: string;
+    onDoubleClick?(shape: TLGeoShape): {
+        props: Partial<TLGeoShape['props']>;
+    } | void;
+    snapType: 'blobby' | 'polygon';
 }
 
 // @public (undocumented)
