@@ -20,7 +20,10 @@
 		}
 	},
 	"ignorePatterns": [
+		"skills/**/*",
 		".claude/**/*",
+		".agents/**/*",
+		".cursor/**/*",
 		"**/node_modules/*",
 		"**/out/*",
 		"**/dist/*",
