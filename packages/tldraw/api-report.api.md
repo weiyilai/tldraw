@@ -207,6 +207,7 @@ export class ArrowBindingHintOverlayUtil extends OverlayUtil<TLArrowBindingHintO
     // (undocumented)
     options: {
         crossSize: number;
+        dashedMinZoom: number;
         dashLengthRatio: number;
         dotRadius: number;
         opacity: number;
